@@ -1,0 +1,71 @@
+// 最外层盒子
+.scroll-container {
+  height: 100vh;
+  width: 100vw;
+  position: relative;
+  margin: 0 auto;
+  // 每张图片的外框item
+  .item {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    transition: 1s ease-in-out;
+    display: flex;
+    justify-content: center;
+    img {
+      position: absolute;
+      height: 100vh;
+      object-fit: cover;
+      transition: 1s;
+    }
+  }
+  // 上一个和下一个框
+  .prev, .next {
+    z-index: 1;
+    height: 0;
+  }
+  // 设置从下往上滑的图片和图片外框底部对齐
+  .next {
+    bottom: 0;
+    img {
+      bottom: 0;
+      transform: translateY(10%);
+    }
+  }
+  .prev {
+    img {
+      transform: translateY(-10%);
+    }
+  }
+}
+
+// 向上滚动
+.scroll-up {
+  .prev {
+    height: 100%;
+    img {
+      transform: translateY(0);
+    }
+  }
+  .cur {
+    img {
+      transform: translateY(10%);
+    }
+  }
+}
+
+// 向下滚动
+.scroll-down {
+  .next {
+    height: 100%;
+    img {
+      transform: translateY(0);
+    }
+  }
+  .cur {
+    img {
+      transform: translateY(-10%);
+    }
+  }
+}
