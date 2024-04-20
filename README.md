@@ -9,7 +9,7 @@
 
 - 再通过监听`transitionend`事件等待css效果结束对图片进行替换。
 
-我写了一个[原生的](https://github.com/OceanJuly/infinite-px-scroll/public/infinite-px-scroll.html)和`react组件`来实现。
+我写了一个[原生的](https://github.com/OceanJuly/infinite-px-scroll/blob/master/public/infinite-px-scroll.html)和`react组件`来实现。
 
 ### 问题
 目前在`react组件`实现过程中发现当替换图片的时候，页面会有一个闪动的问题，后面再解决。

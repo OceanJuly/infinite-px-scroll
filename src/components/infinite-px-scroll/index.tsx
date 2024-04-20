@@ -1,6 +1,6 @@
 import './index.less'
 import {InfinitePxScrollProps} from "./interface.ts";
-import {useEffect, useRef, useState} from "react";
+import {useEffect, useRef} from "react";
 
 const defImgs: string[] = [
     '../src/assets/imgs/preview1.jpg',
@@ -14,13 +14,13 @@ let isAnimating: boolean = false
 
 const InfinitePxScroll = ({imgList}: InfinitePxScrollProps) => {
     const scrollRef = useRef<any>()
-    const [curIdx, setCurIdx] = useState<number>(0)
+    const index = useRef<number>(0)
     function prevIndex() {
-        return curIdx === 0 ? imgList!.length - 1 : curIdx - 1
+        return index.current === 0 ? imgList!.length - 1 : index.current - 1
     }
 
     function nextIndex() {
-        return curIdx === imgList!.length - 1 ? 0 : curIdx + 1
+        return index.current === imgList!.length - 1 ? 0 : index.current + 1
     }
 
     function createImg(index: number) {
@@ -37,7 +37,7 @@ const InfinitePxScroll = ({imgList}: InfinitePxScrollProps) => {
         scrollRef.current!.innerHTML = ''
         const prev = prevIndex()
         const next = nextIndex()
-        createImg(curIdx).classList.add('cur')
+        createImg(index.current).classList.add('cur')
         createImg(prev).classList.add('prev')
         createImg(next).classList.add('next')
     }
@@ -52,14 +52,13 @@ const InfinitePxScroll = ({imgList}: InfinitePxScrollProps) => {
 
     function handleTransitionEnd() {
         isAnimating = false
-        if (scrollRef.current.classList.contains('scroll-down')) setCurIdx(nextIndex())
-        else setCurIdx(prevIndex())
-        scrollRef.current.className = 'scroll-container'
+        if (scrollRef.current.classList.contains('scroll-down')) index.current = nextIndex()
+        else index.current = prevIndex()
+        scrollRef.current.classList.remove('scroll-down', 'scroll-up')
         resetElements()
     }
 
     useEffect(() => {
-        console.log(1);
         if (!imgList || !imgList.length) imgList = defImgs
         resetElements()
         window.addEventListener('wheel', handleWheel)
@@ -68,7 +67,7 @@ const InfinitePxScroll = ({imgList}: InfinitePxScrollProps) => {
             window.removeEventListener('wheel', handleWheel)
             scrollRef.current.removeEventListener('transitionend', handleTransitionEnd)
         })
-    }, [curIdx]);
+    }, []);
 
     return (
         <div className="scroll-container" ref={scrollRef}></div>
