@@ -1,7 +1,7 @@
 # 无限视差滚动
 
 ### 效果图
-![Alt](https://github.com/OceanJuly/infinite-px-scroll/blob/master/public/scroll-pic.webp)
+![Alt](https://github.com/OceanJuly/infinite-px-scroll/blob/master/public/scroll.gif)
 
 ### 实现方式
 - 不管有多少张图片，我们只要动态创建三张图片分别表示当前和上一张、下一张图片，并设置一个动画效果；
